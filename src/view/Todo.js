@@ -1,10 +1,11 @@
 import React from 'react'
+import './todo.css'
 
-function Todo ({ text }) {
+function Todo ({ item, onToggle, onDelete }) {
   return (
     <li className="todo">
-      <span className="text">{text}</span>
-      <span className="del">x</span>
+      <span style={{textDecoration: item.active ? 'none' : 'line-through'}} className="text" onClick={onToggle}>{item.text}</span>
+      <span className="del" onClick={onDelete}>x</span>
     </li>
   )
 }

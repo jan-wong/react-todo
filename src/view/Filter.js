@@ -1,14 +1,33 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { setFilter } from '../actions/filter'
+import './filter.css'
 
-function Filter () {
+function Filter ({ filter, setFilter }) {
   return (
     <div className="filter">
       Select:
-      <label><input name="filter" type="radio" value="All" />All</label>
-      <label><input name="filter" type="radio" value="Active" />Active</label>
-      <label><input name="filter" type="radio" value="completed" />Completed</label>
+      <form onChange={e => setFilter(e.target.value)} >
+        <label><input name="filter" type="radio" defaultChecked value="ALL" />All</label>
+        <label><input name="filter" type="radio" value="ACTIVE" />Active</label>
+        <label><input name="filter" type="radio" value="COMPLETE" />Complete</label>
+      </form>
     </div>
   )
 }
 
-export default Filter
+const mapStateToProps = state => {
+  return {
+    filter: state.filter
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setFilter: type => {
+      dispatch(setFilter(type))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Filter)

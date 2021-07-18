@@ -1,18 +1,20 @@
-import React from 'react'
+import React, { useRef } from 'react'
+import { connect } from 'react-redux'
+import { addTodo } from '../actions/todos'
 
-function AddTodo () {
-  let input = null
+function AddTodo ({ dispatch }) {
+  let input = useRef(null)
 
   const onKeyDown = (e) => {
-    if (e.keyCode === '13') {
-      let value = input.value
+    if (e.keyCode === 13) {
+      dispatch(addTodo(input.value))
       input.value = ''
     }
   }
 
   return (
-    <input ref={input} onKeyDown={onKeyDown} />
+    <input ref={node => input = node} onKeyDown={onKeyDown} />
   )
 }
 
-export default AddTodo
+export default connect()(AddTodo)
