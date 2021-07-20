@@ -1,13 +1,15 @@
 import React, { useRef } from 'react'
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { addTodo } from '../actions/todos'
 
-function AddTodo ({ dispatch }) {
+function AddTodo () {
   let input = useRef(null)
+  const dispatch = useDispatch()
 
   const onKeyDown = (e) => {
     if (e.keyCode === 13) {
-      dispatch(addTodo(input.value))
+      let value = input.value
+      value && dispatch(addTodo(value))
       input.value = ''
     }
   }
@@ -17,4 +19,4 @@ function AddTodo ({ dispatch }) {
   )
 }
 
-export default connect()(AddTodo)
+export default AddTodo

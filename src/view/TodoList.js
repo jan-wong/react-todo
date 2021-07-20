@@ -1,14 +1,17 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Todo from './Todo'
 import { FILTER_TYPES } from '../actions/filter'
 import { toggleTodo, removeTodo } from '../actions/todos'
 import './todolist.css'
 
-function TodoList ({ todos = [], onToggle, onDelete }) {
+function TodoList () {
+  const dispatch = useDispatch()
+  const todos = useSelector(state => getVisibleTodos(state.todos, state.filter))
+
   return (
     <ul className="todo-list">
-      {todos.map((item, index) => <Todo key={item.id} item={item} onToggle={() => onToggle(index)} onDelete={() => onDelete(index)} />)}
+      {todos.map((item, index) => <Todo key={item.id} item={item} onToggle={() => dispatch(toggleTodo(index))} onDelete={() => dispatch(removeTodo(index))} />)}
     </ul>
   )
 }
@@ -26,21 +29,4 @@ const getVisibleTodos = (todos, filter) => {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    todos: getVisibleTodos(state.todos, state.filter)
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    onToggle: index => {
-      dispatch(toggleTodo(index))
-    },
-    onDelete: index => {
-      dispatch(removeTodo(index))
-    }
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TodoList)
+export default TodoList

@@ -5,7 +5,6 @@ import TodoList from './view/TodoList'
 import Filter from './view/Filter'
 
 function App(props) {
-  console.log(props)
   return (
     <div className="App">
       <AddTodo />

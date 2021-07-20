@@ -6,3 +6,8 @@ A todo application by react
 * TodoList
 * Todo
 * Filter
+
+## skill
+* React
+* Redux
+* React-redux
