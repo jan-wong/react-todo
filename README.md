@@ -8,6 +8,7 @@ A todo application by react
 * Filter
 
 ## skill
-* React
+* React Hooks
 * Redux
-* React-redux
+* React-redux Hooks
+* Redux-actions

@@ -1,3 +1,4 @@
+import { handleActions } from 'redux-actions'
 import {
   SET_FILTER,
   FILTER_TYPES
@@ -5,11 +6,13 @@ import {
 
 const { ALL } = FILTER_TYPES
 
-export default function filter (state = ALL, action) {
-  switch (action.type) {
-    case SET_FILTER:
-      return action.filter
-    default:
-      return state
-  }
-}
+const filter = handleActions(
+  {
+    [SET_FILTER]: (state, { payload }) => {
+      return payload
+    }
+  },
+  ALL
+)
+
+export default filter
